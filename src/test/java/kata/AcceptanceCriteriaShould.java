@@ -2,8 +2,6 @@ package kata;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AcceptanceCriteriaShould {
@@ -27,7 +25,7 @@ public class AcceptanceCriteriaShould {
         var hobbitProduct = new Product(hobbitID, "The Hobbit", new Money(5));
         var breakingBadID = new ProductID(2);
         var breakingBadProduct = new Product(breakingBadID, "Breaking bad", new Money(7));
-        var basket = new ShoppingBasket();
+        var basket = new ShoppingBasket(new ShoppingRepository());
         basket.addItem(user, hobbitProduct, 2);
         basket.addItem(user, breakingBadProduct, 5);
         var result = basket.basketFor(user);

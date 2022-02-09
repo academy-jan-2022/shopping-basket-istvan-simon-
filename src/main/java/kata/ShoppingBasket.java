@@ -1,9 +1,10 @@
 package kata;
 
-import java.util.List;
-
 public class ShoppingBasket implements ShoppingBasketService {
 
+
+    public ShoppingBasket(ShoppingRepositoryService shoppingRepository) {
+    }
 
     @Override
     public void addItem(UserID userId, Product product, int quantity) {
