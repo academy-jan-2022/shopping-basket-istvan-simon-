@@ -11,7 +11,7 @@ public class ShoppingBasket implements ShoppingBasketService {
     }
 
     @Override
-    public List<Purchase> basketFor(UserID userId) {
+    public String basketFor(UserID userId) {
         throw new UnsupportedOperationException();
     }
 }
