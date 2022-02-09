@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ShoppingRepositoryInMemory implements ShoppingRepository {
-    private HashMap<UserID, List<Purchase>> storage = new HashMap<UserID,List<Purchase>>();
+    private final HashMap<UserID, List<Purchase>> storage = new HashMap<UserID,List<Purchase>>();
     @Override
     public void addPurchase(UserID userID,ProductID product, int quantity) {
         if (storage.get(userID) == null){
@@ -13,8 +13,7 @@ public class ShoppingRepositoryInMemory implements ShoppingRepository {
             return;
         }
         List<Purchase> oldList = storage.get(userID);
-        List<Purchase> list= new ArrayList<>();
-        list.addAll(oldList);
+        List<Purchase> list = new ArrayList<>(oldList);
         list.add(new Purchase(product, quantity));
 
         storage.put(userID, list);
