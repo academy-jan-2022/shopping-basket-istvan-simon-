@@ -26,7 +26,7 @@ public class AcceptanceCriteriaShould {
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));
 
-        String expectedOutput= "- Creation date (of the shopping basket)\n" +
+        String expectedOutput= "- Creation date 09-02-2022\n" +
             "- 2 x The Hobbit   // 2 x 5.00 = £10.00\n" +
             "- 5 x Breaking Bad // 5 x 7.00 = £35.00\n" +
             "- Total: £45.00";
