@@ -17,6 +17,17 @@ public class ShoppingBasket implements ShoppingBasketService {
 
     @Override
     public String basketFor(UserID userId) {
-        throw new UnsupportedOperationException();
+        StringBuilder output = new StringBuilder(" - Creation date (of the shopping basket)\n");
+        var list = shoppingRepository.getFor(userId);
+        for (Purchase purchase : list) {
+            output.append("    - ");
+            output.append(purchase.amount());
+            output.append(" x ");
+            output.append(purchase.productID().product());
+            output.append("\n");
+        }
+
+
+        return output.toString();
     }
 }
