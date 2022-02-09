@@ -20,15 +20,13 @@ public class AcceptanceCriteriaShould {
     @Test void
     confirm_this_order(){
 
-        var user = new UserID(1);
+        var userID = new UserID(1);
         var hobbitID = new ProductID(1);
-        var hobbitProduct = new Product(hobbitID, "The Hobbit", new Money(5));
         var breakingBadID = new ProductID(2);
-        var breakingBadProduct = new Product(breakingBadID, "Breaking bad", new Money(7));
-        var basket = new ShoppingBasket(new ShoppingRepository());
-        basket.addItem(user, hobbitProduct, 2);
-        basket.addItem(user, breakingBadProduct, 5);
-        var result = basket.basketFor(user);
+        var basket = new ShoppingBasket(new ShoppingRepositoryInMemory());
+        basket.addItem(userID, hobbitID, 2);
+        basket.addItem(userID, breakingBadID, 5);
+        var result = basket.basketFor(userID);
 
         String expectedOutput = " - Creation date (of the shopping basket)\n" +
             "    - 2 x The Hobbit   // 2 x 5.00 = £10.00\n" +

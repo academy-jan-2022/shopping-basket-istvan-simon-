@@ -3,14 +3,14 @@ package kata;
 public class ShoppingBasket implements ShoppingBasketService {
 
 
-    private final ShoppingRepositoryService shoppingRepository;
+    private final ShoppingRepository shoppingRepository;
 
-    public ShoppingBasket(ShoppingRepositoryService shoppingRepository) {
+    public ShoppingBasket(ShoppingRepository shoppingRepository) {
         this.shoppingRepository = shoppingRepository;
     }
 
     @Override
-    public void addItem(UserID userId, Product product, int quantity) {
+    public void addItem(UserID userId, ProductID product, int quantity) {
 
         shoppingRepository.addPurchase(product,quantity);
     }
