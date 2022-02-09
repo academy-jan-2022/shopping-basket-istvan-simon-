@@ -1,6 +1,8 @@
 package kata;
 
+import java.util.List;
+
 public interface ShoppingBasketService {
-    void addItem(UserID userId, ProductID productId, int quantity);
-    void basketFor(UserID userId);
+    void addItem(UserID userId, Product product, int quantity);
+    List<Purchase> basketFor(UserID userId);
 }

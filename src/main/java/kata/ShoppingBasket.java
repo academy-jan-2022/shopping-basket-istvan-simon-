@@ -1,16 +1,17 @@
 package kata;
 
-import jdk.jshell.spi.ExecutionControl;
+import java.util.List;
 
 public class ShoppingBasket implements ShoppingBasketService {
 
+
     @Override
-    public void addItem(UserID userId, ProductID productId, int quantity) {
+    public void addItem(UserID userId, Product product, int quantity) {
          throw new UnsupportedOperationException();
     }
 
     @Override
-    public void basketFor(UserID userId) {
+    public List<Purchase> basketFor(UserID userId) {
         throw new UnsupportedOperationException();
     }
 }
