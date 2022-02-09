@@ -12,7 +12,7 @@ public class ShoppingBasket implements ShoppingBasketService {
     @Override
     public void addItem(UserID userId, ProductID product, int quantity) {
 
-        shoppingRepository.addPurchase(product,quantity);
+        shoppingRepository.addPurchase(userId,product,quantity);
     }
 
     @Override

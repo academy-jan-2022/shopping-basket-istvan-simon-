@@ -1,3 +1,3 @@
 package kata;
 
-public record Purchase(ProductID id, int amount){}
+public record Purchase(UserID userID, ProductID productID, int amount){}
