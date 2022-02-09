@@ -3,12 +3,16 @@ package kata;
 public class ShoppingBasket implements ShoppingBasketService {
 
 
+    private final ShoppingRepositoryService shoppingRepository;
+
     public ShoppingBasket(ShoppingRepositoryService shoppingRepository) {
+        this.shoppingRepository = shoppingRepository;
     }
 
     @Override
     public void addItem(UserID userId, Product product, int quantity) {
-         throw new UnsupportedOperationException();
+
+        shoppingRepository.addPurchase(product,quantity);
     }
 
     @Override

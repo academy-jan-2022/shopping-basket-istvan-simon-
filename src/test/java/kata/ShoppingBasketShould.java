@@ -16,7 +16,6 @@ public class ShoppingBasketShould {
         var repositoryMock = mock(ShoppingRepositoryService.class);
         ShoppingBasket basket = new ShoppingBasket(repositoryMock);
         basket.addItem(user, product, quantity);
-
         verify(repositoryMock).addPurchase(product, quantity);
     }
 }
