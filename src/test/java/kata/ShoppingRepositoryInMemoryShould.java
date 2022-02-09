@@ -23,4 +23,19 @@ public class ShoppingRepositoryInMemoryShould {
             result
         );
     }
+    @Test void
+    add_two_items(){
+        UserID userID = new UserID(1);
+        ProductID productID = new ProductID(1);
+        ProductID secondproductID = new ProductID(2);
+        int quantity = 5;
+        ShoppingRepository repo = new ShoppingRepositoryInMemory();
+        repo.addPurchase(userID, productID, quantity);
+        repo.addPurchase(userID, secondproductID, quantity);
+        var result = repo.getFor(userID);
+        assertEquals(
+            List.of(new Purchase(productID,quantity), new Purchase(secondproductID,quantity)),
+            result
+        );
+    }
 }
