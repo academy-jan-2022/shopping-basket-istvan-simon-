@@ -3,6 +3,7 @@ package kata;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,7 +19,7 @@ public class ShoppingRepositoryInMemoryShould {
         repo.addPurchase(userID, productID, quantity);
         var result = repo.getFor(userID);
         assertEquals(
-            List.of(new Purchase(userID,productID,quantity)),
+            List.of(new Purchase(productID,quantity)),
             result
         );
     }
