@@ -12,10 +12,19 @@ public class ShoppingRepositoryInMemory implements ShoppingRepository {
             storage.put(userID,List.of(new Purchase(product, quantity)));
             return;
         }
-        List<Purchase> oldList = storage.get(userID);
-        List<Purchase> list = new ArrayList<>(oldList);
-        list.add(new Purchase(product, quantity));
 
+        List<Purchase> list = new ArrayList<>(storage.get(userID));
+
+        for (int i=0; i < list.size(); i++) {
+            if (list.get(i).productID() == product) {
+                int currentAmount = list.get(i).amount();
+                list.set(i, new Purchase(product, (currentAmount + quantity)));
+                storage.put(userID, list);
+                return;
+            }
+        }
+
+        list.add(new Purchase(product, quantity));
         storage.put(userID, list);
     }
     @Override
