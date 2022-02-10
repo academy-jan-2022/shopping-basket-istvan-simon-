@@ -2,6 +2,7 @@ package kata;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 public class ShoppingBasket implements ShoppingBasketService {
 
@@ -23,7 +24,9 @@ public class ShoppingBasket implements ShoppingBasketService {
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         var creationDate = formatter.format(new Date());
-        var productRepository = new ProductRepository();
+        var repo = new HashMap<ProductID, Product>();
+
+        var productRepository = new ProductRepository(repo);
         String output = " - Creation date "
             +creationDate
             +"\n"

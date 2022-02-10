@@ -2,9 +2,6 @@ package kata;
 
 import org.junit.jupiter.api.Test;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -46,9 +43,10 @@ public class ShoppingBasketShould {
         ProductID secondProductID = new ProductID(2);
         String secondProductTitle =  "The hobbit";
         int secondProductPrice = 5;
-        ProductRepository productRepository = new ProductRepository();
-        productRepository.createProduct(productID, productTitle,productPrice);
-        productRepository.createProduct(secondProductID, secondProductTitle,secondProductPrice);
+        var repositoryMock = mock(ProductRepository.class);
+
+        repositoryMock.createProduct(productID, productTitle,productPrice);
+        repositoryMock.createProduct(secondProductID, secondProductTitle,secondProductPrice);
         int quantity = 5;
         ShoppingBasket basket = new ShoppingBasket(new ShoppingRepositoryInMemory());
         basket.addItem(userID, productID, quantity);
