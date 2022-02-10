@@ -1,4 +1,5 @@
 package kata;
 
-public record ProductID(int product) {
+public record ProductID(int productID) {
+
 }

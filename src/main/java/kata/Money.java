@@ -1,8 +1,4 @@
 package kata;
 
-public class Money {
-
-    public Money(int i) {
-
-    }
+public record Money (float amount) {
 }
