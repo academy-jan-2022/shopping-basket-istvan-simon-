@@ -12,8 +12,8 @@ public class ProductRepository {
     }
 
 
-    public Product getProduct(ProductID id){
-        return new Product(new ProductID(1), "Breaking Bad", new Money(7));
+    public Product getProduct(ProductID productID){
+        return storage.get(productID);
     }
 
     public void createProduct(ProductID productID, String productTitle, int productPrice) {

@@ -54,9 +54,9 @@ public class ProductRepositoryShould {
         var productPrice = 5;
 
         repo.createProduct(productID, title, productPrice);
-        var expectedProduct = repo.getProduct(productID);
+        var outputProduct = repo.getProduct(productID);
 
-        assertEquals(expectedProduct, new Product(productID, title, new Money(productPrice)));
+        assertEquals(new Product(productID, title, new Money(productPrice)), outputProduct);
     }
 
 }
