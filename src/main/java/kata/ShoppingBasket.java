@@ -28,7 +28,6 @@ public class ShoppingBasket implements ShoppingBasketService {
             +creationDate
             +"\n"
             +"    - ";
-
             var itemPrice = productRepository.getProduct().price().amount();
             var itemAmount = list.get(0).amount();
             var itemTotal = itemPrice * itemAmount;

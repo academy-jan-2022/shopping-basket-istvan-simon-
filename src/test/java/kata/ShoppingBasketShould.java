@@ -37,5 +37,31 @@ public class ShoppingBasketShould {
         assertEquals(expected, result);
 
     }
+    @Test void
+    return_two_items_content_for_specified_user() {
+        UserID userID = new UserID(1);
+        ProductID productID = new ProductID(1);
+        String productTitle =  "Breaking Bad";
+        int productPrice = 7;
+        ProductID secondProductID = new ProductID(2);
+        String secondProductTitle =  "The hobbit";
+        int secondProductPrice = 5;
+        ProductRepository productRepository = new ProductRepository();
+        productRepository.createProduct(productID, productTitle,productPrice);
+        productRepository.createProduct(secondProductID, secondProductTitle,secondProductPrice);
+        int quantity = 5;
+        ShoppingBasket basket = new ShoppingBasket(new ShoppingRepositoryInMemory());
+        basket.addItem(userID, productID, quantity);
+        basket.addItem(userID, secondProductID, quantity);
+
+        var expected = " - Creation date 10-02-2022\n" +
+            "    - 5 x Breaking Bad // 5 x 7.00 = £35.00\n" +
+            "    - 5 x The hobbit // 5 x 5.00 = £25.00\n" +
+            "    - Total: £60.00";
+        var result = basket.basketFor(userID);
+
+        assertEquals(expected, result);
+
+    }
 
 }
