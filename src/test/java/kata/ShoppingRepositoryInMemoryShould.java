@@ -50,4 +50,21 @@ public class ShoppingRepositoryInMemoryShould {
             result
         );
     }
+
+    @Test void
+    add_an_item_twice_plus_another_item(){
+        UserID userID = new UserID(1);
+        ProductID productID = new ProductID(1);
+        ProductID secondProductID = new ProductID(2);
+        int quantity = 5;
+        ShoppingRepository repo = new ShoppingRepositoryInMemory();
+        repo.addPurchase(userID, productID, quantity);
+        repo.addPurchase(userID, productID, quantity);
+        repo.addPurchase(userID, secondProductID, quantity);
+        var result = repo.getFor(userID);
+        assertEquals(
+            List.of(new Purchase(productID,quantity+quantity), new Purchase(secondProductID, quantity)),
+            result
+        );
+    }
 }
