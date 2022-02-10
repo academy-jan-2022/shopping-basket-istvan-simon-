@@ -32,7 +32,7 @@ public class AcceptanceCriteriaShould {
         ProductRepository productRepository = new ProductRepository(new HashMap<ProductID, Product>());
         productRepository.createProduct(hobbitID, hobbitTitle, hobbitPrice);
         productRepository.createProduct(breakingBadID, breakingBadTitle, breakingBadPrice);
-        var basket = new ShoppingBasket(new ShoppingRepositoryInMemory(),productRepository);
+        var basket = new ShoppingBasket(new ShoppingRepositoryInMemory(new DateProvider()),productRepository);
         basket.addItem(userID, hobbitID, 2);
         basket.addItem(userID, breakingBadID, 5);
         var result = basket.basketFor(userID);

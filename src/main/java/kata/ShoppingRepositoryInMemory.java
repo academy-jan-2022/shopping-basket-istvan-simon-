@@ -1,12 +1,17 @@
 package kata;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 public class ShoppingRepositoryInMemory implements ShoppingRepository {
     private final HashMap<UserID, List<Purchase>> storage = new HashMap<UserID,List<Purchase>>();
+    private final DateProvider dateProvider;
+
+    public ShoppingRepositoryInMemory(DateProvider dateProvider) {
+        this.dateProvider = dateProvider;
+    }
+
     @Override
     public void addPurchase(UserID userID,ProductID product, int quantity) {
         if (storage.get(userID) == null){
@@ -31,5 +36,10 @@ public class ShoppingRepositoryInMemory implements ShoppingRepository {
     @Override
     public List<Purchase> getFor(UserID userID) {
         return storage.get(userID);
+    }
+
+    @Override
+    public String getDate(UserID userID) {
+        throw new UnsupportedOperationException();
     }
 }

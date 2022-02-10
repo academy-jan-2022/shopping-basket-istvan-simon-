@@ -2,11 +2,13 @@ package kata;
 
 import org.junit.jupiter.api.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class ShoppingBasketShould {
 
@@ -30,7 +32,7 @@ public class ShoppingBasketShould {
         int quantity = 5;
         ProductRepository productRepository = new ProductRepository(new HashMap<ProductID, Product>());
         productRepository.createProduct(productID, productTitle, productPrice);
-        ShoppingBasket basket = new ShoppingBasket(new ShoppingRepositoryInMemory(),productRepository);
+        ShoppingBasket basket = new ShoppingBasket(new ShoppingRepositoryInMemory(new DateProvider()),productRepository);
         basket.addItem(userID, productID, quantity);
         var expected = " - Creation date 10-02-2022\n" +
             "    - 5 x Breaking Bad // 5 x 7.00 = £35.00\n" +
@@ -58,7 +60,7 @@ public class ShoppingBasketShould {
         ProductRepository productRepository = new ProductRepository(new HashMap<ProductID, Product>());
         productRepository.createProduct(productID, productTitle, productPrice);
         productRepository.createProduct(secondProductID, secondProductTitle, secondProductPrice);
-        ShoppingBasket basket = new ShoppingBasket(new ShoppingRepositoryInMemory(),productRepository );
+        ShoppingBasket basket = new ShoppingBasket(new ShoppingRepositoryInMemory(new DateProvider()),productRepository );
         basket.addItem(userID, productID, quantity);
         basket.addItem(userID, secondProductID, quantity);
 
@@ -70,6 +72,27 @@ public class ShoppingBasketShould {
 
         assertEquals(expected, result);
 
+    }
+
+    @Test void
+    return_basket_date_01_01_2022() throws ParseException {
+        UserID userID = new UserID(1);
+        ProductID productID = new ProductID(1);
+        String productTitle = "Breaking Bad";
+        int productPrice = 7;
+        int quantity = 5;
+        ProductRepository productRepository = new ProductRepository(new HashMap<ProductID, Product>());
+        productRepository.createProduct(productID, productTitle, productPrice);
+        DateProvider dateProvider = mock(DateProvider.class);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        Date expectedDate = formatter.parse("01-01-2022");
+        when(dateProvider.getDate()).thenReturn(expectedDate);
+        ShoppingRepository shoppingRepository = new ShoppingRepositoryInMemory(dateProvider);
+        shoppingRepository.addPurchase(userID,productID,quantity);
+
+        String output = shoppingRepository.getDate(userID);
+        String expected = "01-01-2022";
+        assertEquals(expected, output);
     }
 
 }

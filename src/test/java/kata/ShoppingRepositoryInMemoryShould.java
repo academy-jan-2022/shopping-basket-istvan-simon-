@@ -13,7 +13,7 @@ public class ShoppingRepositoryInMemoryShould {
         UserID userID = new UserID(1);
         ProductID productID = new ProductID(1);
         int quantity = 5;
-        ShoppingRepository repo = new ShoppingRepositoryInMemory();
+        ShoppingRepository repo = new ShoppingRepositoryInMemory(new DateProvider());
         repo.addPurchase(userID, productID, quantity);
         var result = repo.getFor(userID);
         assertEquals(
@@ -27,7 +27,7 @@ public class ShoppingRepositoryInMemoryShould {
         ProductID productID = new ProductID(1);
         ProductID secondproductID = new ProductID(2);
         int quantity = 5;
-        ShoppingRepository repo = new ShoppingRepositoryInMemory();
+        ShoppingRepository repo = new ShoppingRepositoryInMemory(new DateProvider());
         repo.addPurchase(userID, productID, quantity);
         repo.addPurchase(userID, secondproductID, quantity);
         var result = repo.getFor(userID);
@@ -41,7 +41,7 @@ public class ShoppingRepositoryInMemoryShould {
         UserID userID = new UserID(1);
         ProductID productID = new ProductID(1);
         int quantity = 5;
-        ShoppingRepository repo = new ShoppingRepositoryInMemory();
+        ShoppingRepository repo = new ShoppingRepositoryInMemory(new DateProvider());
         repo.addPurchase(userID, productID, quantity);
         repo.addPurchase(userID, productID, quantity);
         var result = repo.getFor(userID);
@@ -57,7 +57,7 @@ public class ShoppingRepositoryInMemoryShould {
         ProductID productID = new ProductID(1);
         ProductID secondProductID = new ProductID(2);
         int quantity = 5;
-        ShoppingRepository repo = new ShoppingRepositoryInMemory();
+        ShoppingRepository repo = new ShoppingRepositoryInMemory(new DateProvider());
         repo.addPurchase(userID, productID, quantity);
         repo.addPurchase(userID, productID, quantity);
         repo.addPurchase(userID, secondProductID, quantity);
