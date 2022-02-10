@@ -31,13 +31,13 @@ public class ShoppingBasket implements ShoppingBasketService {
             +creationDate
             +"\n"
             +"    - ";
-            var itemPrice = productRepository.getProduct().price().amount();
+            var itemPrice = productRepository.getProduct(list.get(0).productID()).price().amount();
             var itemAmount = list.get(0).amount();
             var itemTotal = itemPrice * itemAmount;
             var total = itemTotal;
             output += list.get(0).amount()
             +" x "
-            + productRepository.getProduct().title()
+            + productRepository.getProduct(list.get(0).productID()).title()
             + " // "
             +itemAmount
             +" x "

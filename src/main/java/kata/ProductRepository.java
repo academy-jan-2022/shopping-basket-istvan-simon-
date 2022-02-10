@@ -12,7 +12,7 @@ public class ProductRepository {
     }
 
 
-    public Product getProduct(){
+    public Product getProduct(ProductID id){
         return new Product(new ProductID(1), "Breaking Bad", new Money(7));
     }
 
