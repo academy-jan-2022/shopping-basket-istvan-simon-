@@ -11,7 +11,6 @@ public class ShoppingBasket implements ShoppingBasketService {
 
     @Override
     public void addItem(UserID userId, ProductID product, int quantity) {
-
         shoppingRepository.addPurchase(userId,product,quantity);
     }
 
