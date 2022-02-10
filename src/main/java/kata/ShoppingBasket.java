@@ -25,30 +25,36 @@ public class ShoppingBasket implements ShoppingBasketService {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         var creationDate = formatter.format(new Date());
         var repo = new HashMap<ProductID, Product>();
+        repo.put(new ProductID(1), new Product(new ProductID(1), "Breaking Bad", new Money(7)));
+        repo.put(new ProductID(2), new Product(new ProductID(2), "The hobbit", new Money(5)));
+
 
         var productRepository = new ProductRepository(repo);
         String output = " - Creation date "
             +creationDate
-            +"\n"
-            +"    - ";
-            var itemPrice = productRepository.getProduct(list.get(0).productID()).price().amount();
-            var itemAmount = list.get(0).amount();
+            +"\n";
+        float finalTotal = 0;
+        for (int i = 0; i < list.size(); i++) {
+            output += "    - ";
+            var itemPrice = productRepository.getProduct(list.get(i).productID()).price().amount();
+            var itemAmount = list.get(i).amount();
             var itemTotal = itemPrice * itemAmount;
             var total = itemTotal;
-            output += list.get(0).amount()
-            +" x "
-            + productRepository.getProduct(list.get(0).productID()).title()
-            + " // "
-            +itemAmount
-            +" x "
-            + String.format("%.2f",itemPrice)
-            +" = £"
-            +String.format("%.2f",itemTotal)
-            +"\n";
-
+            output += list.get(i).amount()
+                + " x "
+                + productRepository.getProduct(list.get(i).productID()).title()
+                + " // "
+                + itemAmount
+                + " x "
+                + String.format("%.2f", itemPrice)
+                + " = £"
+                + String.format("%.2f", itemTotal)
+                + "\n";
+            finalTotal += total;
+        }
             output += "    - Total: £"
 
-            +String.format("%.2f",total);
+            +String.format("%.2f",finalTotal);
 
         return  output;
     }

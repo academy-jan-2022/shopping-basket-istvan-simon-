@@ -11,7 +11,6 @@ public class ProductRepository {
         this.storage = storage;
     }
 
-
     public Product getProduct(ProductID productID){
         return storage.get(productID);
     }
