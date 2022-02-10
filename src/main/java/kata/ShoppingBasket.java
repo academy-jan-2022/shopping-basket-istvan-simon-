@@ -24,12 +24,6 @@ public class ShoppingBasket implements ShoppingBasketService{
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         var creationDate = formatter.format(new Date());
-        //var repo = new HashMap<ProductID, Product>();
-        //repo.put(new ProductID(1), new Product(new ProductID(1), "Breaking Bad", new Money(7)));
-        //repo.put(new ProductID(2), new Product(new ProductID(2), "The hobbit", new Money(5)));
-
-
-
         String output = " - Creation date "
             +creationDate
             +"\n";
