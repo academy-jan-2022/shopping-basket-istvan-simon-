@@ -11,11 +11,17 @@ public class ShoppingRepositoryInMemory implements ShoppingRepository {
     public ShoppingRepositoryInMemory(DateProvider dateProvider) {
         this.dateProvider = dateProvider;
     }
-
+/*[BASKET CREATED]: Created[<"YYYY-07-12">], User[]*/
+/*[ITEM ADDED TO SHOPPING CART]: Added[<"YYYY-07-12">], User[], Product[], Quantity[], Price[<£12.00>]*/
     @Override
     public void addPurchase(UserID userID,ProductID product, int quantity) {
+        String currentDate= dateProvider.getDate();
         if (storage.get(userID) == null){
-            storage.put(userID,List.of(new Purchase(product, quantity, dateProvider.getDate())));
+
+            storage.put(userID,List.of(new Purchase(product, quantity, currentDate)));
+            System.out.print("[BASKET CREATED]: Created[<\""+currentDate+"\">], "+userID+" \n");
+            System.out.print("[ITEM ADDED TO SHOPPING CART]: Added[<\""+currentDate+"\">], "+userID+", "+product+", "+quantity+", NOT KNOWN\n");
+
             return;
         }
 
@@ -27,12 +33,14 @@ public class ShoppingRepositoryInMemory implements ShoppingRepository {
                 var actualCreationDate = list.get(i).creationDate();
                 list.set(i, new Purchase(product, (currentAmount + quantity), actualCreationDate));
                 storage.put(userID, list);
+                System.out.print("[ITEM ADDED TO SHOPPING CART]: Added[<\""+currentDate+"\">], "+userID+", "+product+", "+quantity+", NOT KNOWN\n");
                 return;
             }
         }
 
         list.add(new Purchase(product, quantity, dateProvider.getDate()));
         storage.put(userID, list);
+        System.out.print("[ITEM ADDED TO SHOPPING CART]: Added[<\""+currentDate+"\">], "+userID+", "+product+", "+quantity+", NOT KNOWN\n");
     }
     @Override
     public List<Purchase> getFor(UserID userID) {
