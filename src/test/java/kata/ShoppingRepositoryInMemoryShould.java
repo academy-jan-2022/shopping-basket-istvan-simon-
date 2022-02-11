@@ -16,8 +16,9 @@ public class ShoppingRepositoryInMemoryShould {
         ShoppingRepository repo = new ShoppingRepositoryInMemory(new DateProvider());
         repo.addPurchase(userID, productID, quantity);
         var result = repo.getFor(userID);
+        var creationDate = new DateProvider().getDate();
         assertEquals(
-            List.of(new Purchase(productID,quantity, "")),
+            List.of(new Purchase(productID,quantity, creationDate)),
             result
         );
     }
@@ -31,8 +32,9 @@ public class ShoppingRepositoryInMemoryShould {
         repo.addPurchase(userID, productID, quantity);
         repo.addPurchase(userID, secondproductID, quantity);
         var result = repo.getFor(userID);
+        var creationDate = new DateProvider().getDate();
         assertEquals(
-            List.of(new Purchase(productID,quantity, ""), new Purchase(secondproductID,quantity, "")),
+            List.of(new Purchase(productID,quantity, creationDate), new Purchase(secondproductID,quantity, creationDate)),
             result
         );
     }
@@ -45,8 +47,9 @@ public class ShoppingRepositoryInMemoryShould {
         repo.addPurchase(userID, productID, quantity);
         repo.addPurchase(userID, productID, quantity);
         var result = repo.getFor(userID);
+        var creationDate = new DateProvider().getDate();
         assertEquals(
-            List.of(new Purchase(productID,quantity+quantity, "")),
+            List.of(new Purchase(productID,quantity+quantity, creationDate)),
             result
         );
     }
@@ -62,8 +65,10 @@ public class ShoppingRepositoryInMemoryShould {
         repo.addPurchase(userID, productID, quantity);
         repo.addPurchase(userID, secondProductID, quantity);
         var result = repo.getFor(userID);
+        var creationDate = new DateProvider().getDate();
         assertEquals(
-            List.of(new Purchase(productID,quantity+quantity, ""), new Purchase(secondProductID, quantity, "")),
+            List.of(new Purchase(productID,quantity+quantity, creationDate), new Purchase(secondProductID, quantity,
+                creationDate)),
             result
         );
     }
