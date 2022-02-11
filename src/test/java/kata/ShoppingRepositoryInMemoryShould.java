@@ -17,7 +17,7 @@ public class ShoppingRepositoryInMemoryShould {
         repo.addPurchase(userID, productID, quantity);
         var result = repo.getFor(userID);
         assertEquals(
-            List.of(new Purchase(productID,quantity)),
+            List.of(new Purchase(productID,quantity, "")),
             result
         );
     }
@@ -32,7 +32,7 @@ public class ShoppingRepositoryInMemoryShould {
         repo.addPurchase(userID, secondproductID, quantity);
         var result = repo.getFor(userID);
         assertEquals(
-            List.of(new Purchase(productID,quantity), new Purchase(secondproductID,quantity)),
+            List.of(new Purchase(productID,quantity, ""), new Purchase(secondproductID,quantity, "")),
             result
         );
     }
@@ -46,7 +46,7 @@ public class ShoppingRepositoryInMemoryShould {
         repo.addPurchase(userID, productID, quantity);
         var result = repo.getFor(userID);
         assertEquals(
-            List.of(new Purchase(productID,quantity+quantity)),
+            List.of(new Purchase(productID,quantity+quantity, "")),
             result
         );
     }
@@ -63,7 +63,7 @@ public class ShoppingRepositoryInMemoryShould {
         repo.addPurchase(userID, secondProductID, quantity);
         var result = repo.getFor(userID);
         assertEquals(
-            List.of(new Purchase(productID,quantity+quantity), new Purchase(secondProductID, quantity)),
+            List.of(new Purchase(productID,quantity+quantity, ""), new Purchase(secondProductID, quantity, "")),
             result
         );
     }

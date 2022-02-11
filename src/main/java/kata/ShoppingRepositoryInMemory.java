@@ -16,7 +16,7 @@ public class ShoppingRepositoryInMemory implements ShoppingRepository {
     @Override
     public void addPurchase(UserID userID,ProductID product, int quantity) {
         if (storage.get(userID) == null){
-            storage.put(userID,List.of(new Purchase(product, quantity)));
+            storage.put(userID,List.of(new Purchase(product, quantity, dateProvider.getDate())));
             return;
         }
 
@@ -25,13 +25,13 @@ public class ShoppingRepositoryInMemory implements ShoppingRepository {
         for (int i=0; i < list.size(); i++) {
             if (list.get(i).productID() == product) {
                 int currentAmount = list.get(i).amount();
-                list.set(i, new Purchase(product, (currentAmount + quantity)));
+                list.set(i, new Purchase(product, (currentAmount + quantity), dateProvider.getDate()));
                 storage.put(userID, list);
                 return;
             }
         }
 
-        list.add(new Purchase(product, quantity));
+        list.add(new Purchase(product, quantity, dateProvider.getDate()));
         storage.put(userID, list);
     }
     @Override
