@@ -3,8 +3,6 @@ package kata;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -84,14 +82,31 @@ public class ShoppingBasketShould {
         ProductRepository productRepository = new ProductRepository(new HashMap<ProductID, Product>());
         productRepository.createProduct(productID, productTitle, productPrice);
         DateProvider dateProvider = mock(DateProvider.class);
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        Date expectedDate = formatter.parse("01-01-2022");
-        when(dateProvider.getDate()).thenReturn(expectedDate);
+        when(dateProvider.getDate()).thenReturn("01-01-2022");
         ShoppingRepository shoppingRepository = new ShoppingRepositoryInMemory(dateProvider);
         shoppingRepository.addPurchase(userID,productID,quantity);
 
         String output = shoppingRepository.getDate(userID);
         String expected = "01-01-2022";
+        assertEquals(expected, output);
+    }
+
+    @Test void
+    return_basket_date_02_02_2022() throws ParseException {
+        UserID userID = new UserID(1);
+        ProductID productID = new ProductID(1);
+        String productTitle = "Breaking Bad";
+        int productPrice = 7;
+        int quantity = 5;
+        ProductRepository productRepository = new ProductRepository(new HashMap<ProductID, Product>());
+        productRepository.createProduct(productID, productTitle, productPrice);
+        DateProvider dateProvider = mock(DateProvider.class);
+        when(dateProvider.getDate()).thenReturn("02-02-2022");
+        ShoppingRepository shoppingRepository = new ShoppingRepositoryInMemory(dateProvider);
+        shoppingRepository.addPurchase(userID,productID,quantity);
+
+        String output = shoppingRepository.getDate(userID);
+        String expected = "02-02-2022";
         assertEquals(expected, output);
     }
 

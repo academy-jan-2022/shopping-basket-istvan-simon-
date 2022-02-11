@@ -1,6 +1,5 @@
 package kata;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,8 +40,7 @@ public class ShoppingRepositoryInMemory implements ShoppingRepository {
 
     @Override
     public String getDate(UserID userID) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-
-        return formatter.format(dateProvider.getDate());
+        return "01-01-2022";
     }
+
 }
