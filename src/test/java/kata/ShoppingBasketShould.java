@@ -93,7 +93,7 @@ public class ShoppingBasketShould {
 
     @Test void
     return_basket_date_02_02_2022() throws ParseException {
-        UserID userID = new UserID(1);
+        UserID userID = new UserID(2);
         ProductID productID = new ProductID(1);
         String productTitle = "Breaking Bad";
         int productPrice = 7;
