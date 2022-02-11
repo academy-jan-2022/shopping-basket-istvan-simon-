@@ -3,7 +3,6 @@ package kata;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 public class ShoppingRepositoryInMemory implements ShoppingRepository {
     private final HashMap<UserID, List<Purchase>> storage = new HashMap<UserID,List<Purchase>>();
@@ -41,9 +40,10 @@ public class ShoppingRepositoryInMemory implements ShoppingRepository {
 
     @Override
     public String getDate(UserID userID) {
-        if (Objects.equals(userID, new UserID(2))) return "02-02-2022";
-        if (Objects.equals(userID, new UserID(3))) return "05-02-2022";
-        return "01-01-2022";
+        var userBasket = getFor(userID);
+        var result = userBasket.get(0).creationDate();
+
+        return result;
     }
 
 }
