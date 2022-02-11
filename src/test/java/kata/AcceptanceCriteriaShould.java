@@ -2,6 +2,8 @@ package kata;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -44,4 +46,31 @@ public class AcceptanceCriteriaShould {
             "    - Total: £45.00";
         assertEquals(expectedOutput, result);
     }
+
+   /* [BASKET CREATED]: Created[<"YYYY-07-12">], User[]
+    [ITEM ADDED TO SHOPPING CART]: Added[<"YYYY-07-12">], User[], Product[], Quantity[], Price[<£12.00>]*/
+    @Test void
+    scenario_two(){
+        var output = new ByteArrayOutputStream(); System.setOut(new PrintStream(output));
+        var userID = new UserID(1);
+        var hobbitID = new ProductID(1);
+        String hobbitTitle = "The Hobbit";
+        int hobbitPrice = 5;
+        var breakingBadID = new ProductID(2);
+        String breakingBadTitle = "Breaking Bad";
+        int breakingBadPrice = 7;
+        ProductRepository productRepository = new ProductRepository(new HashMap<ProductID, Product>());
+        productRepository.createProduct(hobbitID, hobbitTitle, hobbitPrice);
+        productRepository.createProduct(breakingBadID, breakingBadTitle, breakingBadPrice);
+        var basket = new ShoppingBasket(new ShoppingRepositoryInMemory(new DateProvider()),productRepository);
+        basket.addItem(userID, hobbitID, 2);
+        basket.addItem(userID, breakingBadID, 5);
+        var expected = "[BASKET CREATED]: Created[<\"11-02-2022\">], UserID[user=1] \n" +
+            "[ITEM ADDED TO SHOPPING CART]: Added[<\"11-02-2022\">], UserID[user=1], ProductID[productID=1], 2, Price[<£5.00>]\n" +
+            "[ITEM ADDED TO SHOPPING CART]: Added[<\"11-02-2022\">], UserID[user=1], ProductID[productID=2], 5, Price[<£7.00>]\n";
+        var result = output.toString();
+        assertEquals(expected, result);
+
+    }
+
 }
