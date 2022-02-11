@@ -24,7 +24,8 @@ public class ShoppingRepositoryInMemory implements ShoppingRepository {
         for (int i=0; i < list.size(); i++) {
             if (list.get(i).productID() == product) {
                 int currentAmount = list.get(i).amount();
-                list.set(i, new Purchase(product, (currentAmount + quantity), dateProvider.getDate()));
+                var actualCreationDate = list.get(i).creationDate();
+                list.set(i, new Purchase(product, (currentAmount + quantity), actualCreationDate));
                 storage.put(userID, list);
                 return;
             }

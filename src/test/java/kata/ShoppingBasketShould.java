@@ -129,4 +129,24 @@ public class ShoppingBasketShould {
         assertEquals(expected, output);
     }
 
+    @Test void
+    return_creation_date_when_adding_items_in_2_days(){
+        UserID userID = new UserID(3);
+        ProductID productID = new ProductID(1);
+        String productTitle = "Breaking Bad";
+        int productPrice = 7;
+        int quantity = 5;
+        ProductRepository productRepository = new ProductRepository(new HashMap<ProductID, Product>());
+        productRepository.createProduct(productID, productTitle, productPrice);
+        DateProvider dateProvider = mock(DateProvider.class);
+        when(dateProvider.getDate()).thenReturn("05-02-2022").thenReturn("07-02-2022");
+        ShoppingRepository shoppingRepository = new ShoppingRepositoryInMemory(dateProvider);
+        shoppingRepository.addPurchase(userID,productID,quantity);
+        shoppingRepository.addPurchase(userID,productID,quantity);
+
+        var expectedCreationDate = "05-02-2022";
+
+        assertEquals(expectedCreationDate, shoppingRepository.getDate(userID));
+    }
+
 }
