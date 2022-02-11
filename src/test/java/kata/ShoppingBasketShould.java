@@ -34,7 +34,7 @@ public class ShoppingBasketShould {
         productRepository.createProduct(productID, productTitle, productPrice);
         ShoppingBasket basket = new ShoppingBasket(new ShoppingRepositoryInMemory(new DateProvider()),productRepository);
         basket.addItem(userID, productID, quantity);
-        var expected = " - Creation date 10-02-2022\n" +
+        var expected = " - Creation date 11-02-2022\n" +
             "    - 5 x Breaking Bad // 5 x 7.00 = £35.00\n" +
             "    - Total: £35.00";
         var result = basket.basketFor(userID);
@@ -64,7 +64,7 @@ public class ShoppingBasketShould {
         basket.addItem(userID, productID, quantity);
         basket.addItem(userID, secondProductID, quantity);
 
-        var expected = " - Creation date 10-02-2022\n" +
+        var expected = " - Creation date 11-02-2022\n" +
             "    - 5 x Breaking Bad // 5 x 7.00 = £35.00\n" +
             "    - 5 x The hobbit // 5 x 5.00 = £25.00\n" +
             "    - Total: £60.00";
