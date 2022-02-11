@@ -110,4 +110,23 @@ public class ShoppingBasketShould {
         assertEquals(expected, output);
     }
 
+    @Test void
+    return_basket_date_05_02_2022() throws ParseException {
+        UserID userID = new UserID(3);
+        ProductID productID = new ProductID(1);
+        String productTitle = "Breaking Bad";
+        int productPrice = 7;
+        int quantity = 5;
+        ProductRepository productRepository = new ProductRepository(new HashMap<ProductID, Product>());
+        productRepository.createProduct(productID, productTitle, productPrice);
+        DateProvider dateProvider = mock(DateProvider.class);
+        when(dateProvider.getDate()).thenReturn("05-02-2022");
+        ShoppingRepository shoppingRepository = new ShoppingRepositoryInMemory(dateProvider);
+        shoppingRepository.addPurchase(userID,productID,quantity);
+
+        String output = shoppingRepository.getDate(userID);
+        String expected = "05-02-2022";
+        assertEquals(expected, output);
+    }
+
 }

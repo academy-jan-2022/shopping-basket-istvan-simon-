@@ -42,6 +42,7 @@ public class ShoppingRepositoryInMemory implements ShoppingRepository {
     @Override
     public String getDate(UserID userID) {
         if (Objects.equals(userID, new UserID(2))) return "02-02-2022";
+        if (Objects.equals(userID, new UserID(3))) return "05-02-2022";
         return "01-01-2022";
     }
 
